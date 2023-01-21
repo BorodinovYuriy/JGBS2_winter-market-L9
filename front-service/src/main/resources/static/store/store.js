@@ -48,16 +48,20 @@ $scope.showProductInfo = function(productId){
             alert(response.data.title);
     })
 }
-//Добавить в корзину
+//Добавить в корзину!
 $scope.addToCart = function(productId){
-    $http.get(cartContextPath + 'api/v1/cart/add/' + productId).then(function(response){
-    $scope.loadCart();
+    $http.get(cartContextPath + 'api/v1/cart/add/' + productId)
+        .then(function(response){
+//            $scope.loadCart();
+ console.log("addToCart, productId: " + productId)
     });
 }
 
-////Удаление
+
+
+//Удаление
 //$scope.deleteProductById = function(id){
-//            $http.delete('http://localhost:5555/core/api/v1/products/' + id)
+//            $http.delete(storeContextPath + 'pi/v1/products/' + id)
 //            .then(function(response) {
 //                $scope.loadProducts();
 //            })
@@ -66,4 +70,5 @@ $scope.addToCart = function(productId){
 $scope.loadProducts();
 
 });
+
 
