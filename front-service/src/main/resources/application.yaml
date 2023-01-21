@@ -1,0 +1,6 @@
+#    http://localhost:3000/front/index.html
+#    http://localhost:3000/index.html
+server:
+  port: 3000
+  servlet:
+      context-path: /front

@@ -1,0 +1,53 @@
+<div>
+    <p></p>
+    <h3>Каталог товаров</h3>
+    <p></p>
+
+    <h4>Фильтр</h4>
+    <form novalidate ng-submit = "loadProducts()">
+        <div class="form-floating input-group-sn" style="...">
+            <input type="text" class="form-control" id="filterTitle" placeholder="title part" ng-model="filter.title_part">
+        </div>
+        <div class="form-floating input-group-sn" style="...">
+            <input type="number" class="form-control" id="filterMinPrice" placeholder="min" ng-model="filter.min_price">
+        </div>
+        <div class="form-floating input-group-sn" style="...">
+            <input type="number" class="form-control" id="filterMaxPrice" placeholder="max" ng-model="filter.max_price">
+        </div>
+        <button class="btn btn-success" type="submit" >Применить</button>
+        <br>
+        <br>
+    </form>
+
+    <table class ="table table-hover" cellpadding="0" cellspacing="0">
+        <!--заголовки -->
+        <tr>
+            <td>id</td>
+            <td>Название</td>
+            <td>Цена</td>
+            <td>Инфо</td>
+            <td>Добавить в корзину</td>
+        </tr>
+        <!--тело  -->
+        <tbody>
+        <!--for-each-->
+        <tr ng-repeat="p in productList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.price}}</td>
+            <td>
+                <button class="btn btn-success" ng-click="showProductInfo(p.id)">Инфо</button>
+            </td>
+            <td>
+                <button class="btn btn-primary" ng-click="addToCart(p.id)">Добавить в корзину</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="container">
+        <button class="btn btn-secondary"  ng-click="change_page(- 1)" >Назад </button>
+        <button class="btn btn-secondary" ng-click="change_page(1)" >Вперёд</button>
+    </div>
+
+</div>
