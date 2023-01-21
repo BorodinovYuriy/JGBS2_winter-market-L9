@@ -31,7 +31,7 @@ public class ProductService {
         if(titlePart != null){
             spec = spec.and(ProductSpecification.nameLike(titlePart));
         }
-        return (productRepository.findAll(spec, PageRequest.of(page -1,5)))/*.stream().toList()*/;
+        return (productRepository.findAll(spec, PageRequest.of(page - 1,5)));
     }
     //*****************************************
 

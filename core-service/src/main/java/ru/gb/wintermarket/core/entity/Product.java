@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class Product {
     private String title;
 
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
 
 
     @ManyToOne
@@ -42,7 +43,7 @@ public class Product {
     private LocalDateTime updatedAt;
 
 
-    public Product(Long id, String title, int price) {
+    public Product(Long id, String title, BigDecimal price) {
         this.id = id;
         this.title = title;
         this.price = price;

@@ -1,15 +1,20 @@
 package ru.gb.wintermarket.carts.model;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import ru.gb.wintermarket.api.dto.ProductDto;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+@Slf4j
 @Data
+
 public class Cart {
     private List<CartItem> items;
-    private int totalPrice;
+    private BigDecimal totalPrice;
 
     public Cart(){
         this.items = new ArrayList<>();
@@ -17,10 +22,11 @@ public class Cart {
     public List<CartItem> getItems() {
         return Collections.unmodifiableList(items);
     }
+
     public void  add(ProductDto productDto) {
             for(CartItem p : items){
                 if(p.getProductId().equals(productDto.getId())){
-                    p.setQuantity(p.getQuantity() + 1);
+                    p.changeQuantity(1);/*setQuantity(p.getQuantity() + 1);*/
                     recalculate();
                     return;
                 }
@@ -33,18 +39,21 @@ public class Cart {
         );
         recalculate();
     }
-    private void recalculate(){
-        totalPrice = 0;
-        for(CartItem item : items){
-            item.setPrice(item.getPricePerProduct() * item.getQuantity());
-            totalPrice += item.getPrice() * item.getQuantity();
+    private void recalculate() {
+        log.warn("recalculate()");
+        totalPrice = new BigDecimal("0.00");
+        for (CartItem item :
+                items) {
+            totalPrice = totalPrice.add(item.getPrice()).setScale(2, RoundingMode.HALF_UP);
         }
     }
     public void increaseProduct(ProductDto productDto) {
         for(CartItem p : items){
             if(p.getProductId().equals(productDto.getId())) {
-                p.setQuantity(p.getQuantity() + 1);
+                p.changeQuantity(1);
                 recalculate();
+                log.warn("after increaseProduct getQuantity = " + p.getQuantity());
+                log.warn("after increaseProduct price = " + p.getPrice());
                 return;
             }
         }
@@ -53,8 +62,9 @@ public class Cart {
         for(CartItem p : items){
             if(p.getProductId().equals(productDto.getId())) {
                 if(p.getQuantity() > 1){
-                    p.setQuantity(p.getQuantity() - 1);
+                    p.changeQuantity(-1);
                     recalculate();
+                    log.warn("after decreaseProduct price = " + p.getPrice());
                     return;
                 }
             }
@@ -68,7 +78,7 @@ public class Cart {
     }
     public void clear() {
         items.clear();
-        totalPrice = 0;
+        totalPrice = new BigDecimal("0.00");
     }
 }
 

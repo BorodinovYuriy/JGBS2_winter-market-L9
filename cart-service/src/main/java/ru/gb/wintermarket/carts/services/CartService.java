@@ -2,6 +2,7 @@ package ru.gb.wintermarket.carts.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import ru.gb.wintermarket.api.dto.ProductDto;
 import ru.gb.wintermarket.api.exceptions.ResourceNotFoundException;
@@ -11,6 +12,7 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+//@Scope("prototype")
 public class CartService {
     private final ProductServiceIntegration productServiceIntegration;
     private Cart tempCart;

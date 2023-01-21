@@ -88,3 +88,4 @@ angular.module('market').controller('indexController', function($scope, $http, $
     };
 });
 
+

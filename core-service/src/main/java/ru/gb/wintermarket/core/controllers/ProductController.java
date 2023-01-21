@@ -52,7 +52,6 @@ public class ProductController {
     }
 
 
-
     @PutMapping
     public ProductDto updateProduct(@RequestBody ProductDto productDto){
         productValidator.validate(productDto);

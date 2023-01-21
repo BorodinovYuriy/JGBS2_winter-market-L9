@@ -1,16 +1,22 @@
 package ru.gb.wintermarket.api.dto;
 
+import java.math.BigDecimal;
+
 public class ProductDto {
+
+    private String title;
+    private BigDecimal price;
+    private String categoryTitle;
+
     public ProductDto() {
     }
 
-    public ProductDto(Long id, String title, int price, String categoryTitle) {
+    public ProductDto(Long id, String title, BigDecimal price, String categoryTitle) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.categoryTitle = categoryTitle;
     }
-
     private Long id;
 
     public Long getId() {
@@ -29,24 +35,19 @@ public class ProductDto {
         this.title = title;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
     public String getCategoryTitle() {
         return categoryTitle;
     }
-
     public void setCategoryTitle(String categoryTitle) {
         this.categoryTitle = categoryTitle;
     }
-
-    private String title;
-private int price;
-private String categoryTitle;
 }
 
